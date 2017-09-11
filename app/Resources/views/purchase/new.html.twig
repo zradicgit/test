@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <legend>Purchase creation</legend>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th class="col-md-1">Name</th>
+                <td class="col-md-6">{{ purchase.product.name }}</td>
+            </tr>
+            <tr>
+                <th class="col-md-1">Price (EUR)</th>
+                <td class="col-md-6">{{ purchase.product.price }}</td>
+            </tr>
+            <tr>
+                <th class="col-md-1">Discount (%)</th>
+                <td class="col-md-6">{{ purchase.product.discount|number_format(2, '.', ',') }}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_label(form.quantity) }}
+            {{ form_widget(form.quantity, { 'attr': {'class': 'form-control form-control-inline'} }) }}
+            {{ form_errors(form.quantity) }}
+        </div>
+
+        <input type="submit" value="Create" class="btn btn-primary"/>
+    {{ form_end(form) }}
+    
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+{% endblock %}

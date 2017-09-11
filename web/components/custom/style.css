@@ -1,0 +1,28 @@
+.container {
+    margin: 30px;
+}
+
+.form-control-inline {
+    min-width: 0;
+    width: auto;
+    margin-bottom: 10px;
+}
+
+button, .form-group, input[type=submit], a {
+    margin-top: 20px;
+}
+
+legend {
+    margin-bottom: 40px; 
+}
+
+.dataTables_filter {
+    width: 100%;
+    float: right;
+    text-align: right;
+}
+
+.alert {
+    width: auto;
+    margin-top: 20px;
+}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <legend>Purchase</legend>
+    
+    <table class="table">
+        <tbody>
+            <tr>
+                <th class="col-md-1">Id</th>
+                <td class="col-md-6">{{ purchase.id }}</td>
+            </tr>
+            <tr>
+                <th>Product</th>
+                <td>{{ purchase.product.name }}</td>
+            </tr>
+            <tr>
+                <th>Price (EUR)</th>
+                <td>{{ purchase.price }}</td>
+            </tr>
+            <tr>
+                <th>Discount (%)</th>
+                <td>{{ purchase.discount|number_format(2, '.', ',') }}</td>
+            </tr>
+            <tr>
+                <th>Quantity</th>
+                <td>{{ purchase.quantity }}</td>
+            </tr>
+            <tr>
+                <th>Total (EUR)</th>
+                <td>{{ ((purchase.price - (purchase.price / 100) * purchase.discount) * purchase.quantity)|number_format(2, '.', ',') }}</td>
+            </tr>
+            <tr>
+                <th>Purchase Date</th>
+                <td>{{ purchase.date|date('Y-m-d') }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

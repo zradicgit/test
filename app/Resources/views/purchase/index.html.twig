@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <legend>Purchases list</legend>
+
+    <table id="table" class="table table-striped table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Product</th>
+                <th>Price (EUR)</th>
+                <th>Discount (%)</th>
+                <th>Quantity</th>
+                <th>Total (EUR)</th>
+                <th>Purchase Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for purchase in purchases %}
+            <tr>
+                <td><a href="{{ path('purchase_show', { 'id': purchase.id }) }}">{{ purchase.id }}</a></td>
+                <td>{{ purchase.product.name }}</td>
+                <td>{{ purchase.price }}</td>
+                <td>{{ purchase.discount|number_format(2, '.', ',') }}</td>
+                <td>{{ purchase.quantity }}</td>
+                <td>{{ ((purchase.price - (purchase.price / 100) * purchase.discount) * purchase.quantity)|number_format(2, '.', ',') }}</td>
+                <td>{{ purchase.date|date('Y-m-d') }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('purchase_show', { 'id': purchase.id }) }}">show</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

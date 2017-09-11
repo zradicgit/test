@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+        <legend>Products list</legend>
+        
+        <table id="table" class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Price (EUR)</th>
+                    <th>Discount (%)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+                <tr>
+                    <td><a href="{{ path('product_show', { 'id': product.id }) }}" class="link">{{ product.id }}</a></td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.discount|number_format(2, '.', ',') }}</td>
+                    <td>
+                        <ul>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li>
+                                    <a href="{{ path('product_show', { 'id': product.id }) }}" class="link">show</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('product_edit', { 'id': product.id }) }}" class="link">edit</a>
+                                </li>
+                            {% endif %}
+                            {% if is_granted('ROLE_USER') %}
+                                <li>
+                                    <a href="{{ path('purchase_new', { 'id': product.id }) }}" class="link">purchase</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    
+{% endblock %}

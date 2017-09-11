@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Test{% endblock %}</title>
+        <link href="{{ asset('components/plugins/bootstrap/dist/css/bootstrap.min.css') }}"  rel="stylesheet"/>
+        <link href="{{ asset('components/plugins/bootstrap/dist/css/bootstrap-theme.min.css') }}"  rel="stylesheet"/>
+        <link href="{{ asset('components/custom/style.css') }}"  rel="stylesheet"/>
+        
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">Test</a>
+                    </div>
+                    <ul class="nav navbar-nav">
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li>
+                                <a href="{{ path('product_new') }}">New Product</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('product_index') }}">List Products</a>
+                            </li>
+                        {% endif %}
+                        
+                        {% if is_granted('ROLE_USER') %}
+                            <li>
+                                <a href="{{ path('product_index') }}">List Products</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('purchase_index') }}">List Purchases</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="{{ path('logout') }}">Logout ({{ app.user.username }})</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        {% endif %}
+        
+        <div class="container">
+            {% block body %}{% endblock %}
+        </div>
+        
+        <script src="{{ asset('components/plugins/jquery/dist/jquery.min.js') }}"></script>
+        <script src="{{ asset('components/plugins/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('components/plugins/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('components/plugins/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+        <script src="{{ asset('components/custom/script.js') }}"></script>
+        
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <legend>Product</legend>
+    
+    <a href="{{ path('product_edit', { 'id': product.id }) }}" class="link btn-lg">Edit</a>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th class="col-md-1">Id</th>
+                <td class="col-md-6">{{ product.id }}</td>
+            </tr>
+            <tr>
+                <th class="col-md-1">Name</th>
+                <td class="col-md-6">{{ product.name }}</td>
+            </tr>
+            <tr>
+                <th class="col-md-1">Price (EUR)</th>
+                <td class="col-md-6">{{ product.price }}</td>
+            </tr>
+            <tr>
+                <th class="col-md-1">Discount (%)</th>
+                <td class="col-md-6">{{ product.discount|number_format(2, '.', ',') }}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+{% endblock %}
